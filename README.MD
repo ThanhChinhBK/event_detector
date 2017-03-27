@@ -6,7 +6,8 @@ Preprocessing: using file data_script.py and encode_window.py
 You will need to have the ACE 2005 data set in the format required by this file. We cannot include the data in this release due to licence issues.
 
 Train and test the model: using file ed_train.py
-References:
+
+## References:
 
 Nguyen, Thien Huu, and Ralph Grishman. "Relation Extraction: Perspective from Convolutional Neural Networks."
 
