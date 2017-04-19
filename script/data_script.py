@@ -222,8 +222,8 @@ if __name__ == "__main__":
         "../ace_2005_td_v7/data/English/nw")
     tokens += t
     anchors += a
-    pickle.dump(tokens, open("tokens1.bin","wb"))
-    pickle.dump(anchors, open("anchors1.bin", "wb"))
+    pickle.dump(tokens, open("../tokens1.bin","wb"))
+    pickle.dump(anchors, open("../anchors1.bin", "wb"))
     """
     t, a = read_corpus(
         "../ace_2005_td_v7/data/English/bc")
@@ -242,7 +242,7 @@ if __name__ == "__main__":
         "../ace_2005_td_v7/data/English/wl")
     tokens = t
     anchors = a
-    pickle.dump(tokens, open("tokens2.bin","wb"))
-    pickle.dump(anchors, open("anchors2.bin", "wb"))
+    pickle.dump(tokens, open("../tokens2.bin","wb"))
+    pickle.dump(anchors, open("../anchors2.bin", "wb"))
 
 
