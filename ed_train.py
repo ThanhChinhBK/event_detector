@@ -18,8 +18,10 @@ FLAGS = tf.flags.FLAGS
 if __name__ == '__main__':
     vectors, sents, anchor = load_data("windows1.bin", "labels1.bin")
     _, sents_test1, anchor_test1 = load_data("windows2.bin", "labels2.bin")
+    '''
     _, sent_test2, anchor_test2 = load_data("windows3.bin", "labels3.bin")
     _, sent_test3, anchor_test3 = load_data("windows4.bin", "labels4.bin")
+    '''
     sents = np.array(sents)
     anchor = np.array(anchor)
     vocab_length = len(vectors)
@@ -45,10 +47,12 @@ if __name__ == '__main__':
     anchor_test_std[range(len(anchor_test)), anchor_test] = 1
     anchor_test1_std = np.zeros((len(anchor_test1), 34))
     anchor_test1_std[range(len(anchor_test1)), anchor_test1] = 1
+    '''
     anchor_test2_std = np.zeros((len(anchor_test2), 34))
     anchor_test2_std[range(len(anchor_test2)), anchor_test2] = 1
     anchor_test3_std = np.zeros((len(anchor_test3), 34))
     anchor_test3_std[range(len(anchor_test3)), anchor_test3] = 1
+    '''
     print("demension: %d, train_size: %d, test_size: %d"
           %( 300, sent_train.shape[0], sent_dev.shape[0]))
 
@@ -202,9 +206,11 @@ if __name__ == '__main__':
         print("Test case 1:")
         test_step(sents_test1, anchor_test1, anchor_test1_std)
         print("Test case 2:")
+        '''
         test_step(sents_test2, anchor_test2, anchor_test2_std)
         print("Test case 3:")
         test_step(sents_test3, anchor_test3, anchor_test3_std)
+        '''
         print("")
         path = saver.save(sess, final_prefix, global_step=current_step)
         print("Saved model checkpoint to {}\n".format(path))

@@ -42,7 +42,7 @@ def load_bin_vec(fname, vocab):
         """
     word_vecs = np.zeros((len(vocab), 300))
     count = 0
-    vocab_bin = gensim.models.word2vec.Word2Vec.load_word2vec_format(
+    vocab_bin = gensim.models.KeyedVectors.load_word2vec_format(
         os.path.join(os.path.dirname(__file__), fname), binary=True)
     for word in vocab:
         if word in vocab_bin:
@@ -65,7 +65,7 @@ def add_unknown_words(word_vecs, vocab, min_df=1, k=300):
 if __name__ == "__main__":
     tokens1 = pickle.load(open("../tokens1.bin", "rb"))
     tokens2 = pickle.load(open("../tokens2.bin", "rb"))
-    anchors1 = pickle.load(open("anchors1.bin", "rb"))
+    anchors1 = pickle.load(open("../anchors1.bin", "rb"))
     anchors2 = pickle.load(open("../anchors2.bin", "rb"))
     input_iter = create_document_iter(tokens1 + tokens2)
     vocab = encode_dictionary(input_iter)
@@ -81,9 +81,11 @@ if __name__ == "__main__":
     pickle.dump(windows2, open("../windows2.bin", "wb"))
     pickle.dump(labels2, open("../labels2.bin", "wb"))
 
-    """windows, labels = encode_window(tokens, anchors, dictionary)
+    '''
+    windows, labels = encode_window(tokens, anchors, dictionary)
     pickle.dump(windows, open("windows2.bin", "wb"))
     pickle.dump(labels, open("labels2.bin", "wb"))
+    '''
     tokens = pickle.load(open("tokens3.bin", "rb"))
     anchors = pickle.load(open("anchors3.bin", "rb"))
     windows, labels = encode_window(tokens, anchors, dictionary)
@@ -95,4 +97,4 @@ if __name__ == "__main__":
     pickle.dump(windows, open("windows4.bin", "wb"))
     pickle.dump(labels, open("labels4.bin", "wb"))
     pickle.dump(word_vecs, open("vector.bin", "wb"))
-    """
+    

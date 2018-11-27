@@ -15,7 +15,7 @@ EVENT_MAP={'None': 0, 'Personnel.Nominate': 1, 'Contact.Phone-Write': 27, 'Busin
            'Movement.Transport': 29, 'Life.Marry': 30, 'UNKOWN': 34, 'Justice.Sentence': 31,
            'Justice.Execute': 25, 'Transaction.Transfer-Ownership': 33}
 
-ace_path = "../ace_2005_td_v7/data/English/"
+ace_path = "ace_2005_td_v7/data/English/"
 
 def read_file(xml_path, text_path):
     print(text_path)
@@ -50,7 +50,10 @@ def read_file(xml_path, text_path):
 
     if "bn" in text_path:
         text = ""
-        doc = minidom.parse(text_path)
+        try:
+            doc = minidom.parse(text_path)
+        except:
+            print("akjfjkadsbfjksdbakjfnasdjfnasdk",text_path)
         doc_root = doc.documentElement
         turn_nodes = xml_parse.get_xmlnode(doc_root, "TURN")
         for turn_node in turn_nodes:
@@ -71,6 +74,34 @@ def read_file(xml_path, text_path):
                                         event_end, event_ident, event_map, event)
  
         return [tokens], [anchors]
+
+    if "bc" in text_path:
+        text = ""
+        try:
+            doc = minidom.parse(text_path)
+        except:
+            print("akjfjkadsbfjksdbakjfnasdjfnasdk",text_path)
+        doc_root = doc.documentElement
+        turn_nodes = xml_parse.get_xmlnode(doc_root, "TURN")
+        for turn_node in turn_nodes:
+            text += " " + xml_parse.get_nodevalue(turn_node, 0).replace("\n", " ")
+        doc_id = xml_parse.get_nodevalue(
+            xml_parse.get_xmlnode(doc_root,
+            "DOCID")[0])
+        doc_type = xml_parse.get_nodevalue(
+            xml_parse.get_xmlnode(doc_root,
+            "DOCTYPE")[0])
+        date_time = xml_parse.get_nodevalue(
+            xml_parse.get_xmlnode(doc_root,
+            "DATETIME")[0])
+    
+        #print(text)
+        sub = len(doc_id) + len(doc_type) + len(date_time) + 6
+        tokens, anchors = read_document(text, sub,event_start, 
+                                        event_end, event_ident, event_map, event)
+ 
+        return [tokens], [anchors]
+ 
     elif "nw" in text_path or "GETTINGPO" in text_path:
         doc = minidom.parse(text_path)
         doc_root = doc.documentElement
@@ -184,6 +215,7 @@ def read_corpus(folder_path):
     tokens, anchors = [], []
     for (file, path) in file_list:
         file_path = os.path.join(folder_path, path, file)
+        print(file_path)
         tok, anc = read_file(file_path + ".apf.xml", file_path + ".sgm")
         count += 1
         tokens += tok
@@ -224,25 +256,30 @@ if __name__ == "__main__":
     anchors += a
     pickle.dump(tokens, open("../tokens1.bin","wb"))
     pickle.dump(anchors, open("../anchors1.bin", "wb"))
-    """
+    
+    '''
     t, a = read_corpus(
         "../ace_2005_td_v7/data/English/bc")
     tokens = t
     anchors = a
     pickle.dump(tokens, open("tokens2.bin","wb"))
     pickle.dump(anchors, open("anchors2.bin", "wb"))
+    '''
 
+    
     t, a = read_corpus(
         "../ace_2005_td_v7/data/English/cts")
     tokens = t
     anchors = a
-    pickle.dump(tokens, open("tokens3.bin","wb"))
-    pickle.dump(anchors, open("anchors3.bin", "wb"))"""
+    pickle.dump(tokens, open("tokens2.bin","wb"))
+    pickle.dump(anchors, open("anchors2.bin", "wb"))
+    '''
     t, a = read_corpus(
         "../ace_2005_td_v7/data/English/wl")
     tokens = t
     anchors = a
     pickle.dump(tokens, open("../tokens2.bin","wb"))
     pickle.dump(anchors, open("../anchors2.bin", "wb"))
+    '''
 
 

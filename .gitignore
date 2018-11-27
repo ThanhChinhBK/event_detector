@@ -1,0 +1,15 @@
+/ace_2005_td_v7/
+__pycache__/
+anchors1.bin
+anchors2.bin
+labels1.bin
+labels2.bin
+runs/
+script/GoogleNews-vectors-negative300.bin
+tokens1.bin
+tokens2.bin
+utils.pyc
+vector.bin
+windows1.bin
+windows2.bin
+ed_model.pyc
